@@ -105,6 +105,9 @@ meshConfig:
       port: "3000"
       pathPrefix: "/api/auth/envoy?path="
       includeRequestHeadersInCheck: ["cookie", "x-forwarded-for", "x-forwarded-proto", "user-agent"]
+      includeAdditionalHeadersInCheck:
+        "x-real-ip": "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
+      headersToUpstreamOnAllow: ["remote-user", "remote-email"]
       headersToDownstreamOnAllow: ["set-cookie"]
       headersToDownstreamOnDeny: ["content-type", "set-cookie"]
 ```
